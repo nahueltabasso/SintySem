@@ -1,0 +1,1465 @@
+/* 
+	EJERCICIO 1
+#include <stdio.h>
+
+#define DOLAR 1039.0
+
+int main() {
+
+    printf("%f",DOLAR);
+
+    return 0;
+}
+
+
+*/
+
+
+/*
+
+	EJERCICIO 27
+#include <stdio.h>
+
+
+int main() {
+    char cad[100];
+    int num;
+    scanf("%[^*]*%d", cad, &num);
+    printf("%s", cad);
+    printf("\n%d", num);
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 28
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int num;
+    scanf("%d", &num);
+    printf("El numero es %d, al cuadrado es %f, al cubo es %f", num, pow(num, 2), pow(num, 3));
+    return 0;
+}
+
+*/
+
+/* 
+	EJERCICIO 29
+#include <stdio.h>
+#include <math.h>
+
+#define PI 3.14159
+
+int main() {
+    float rad, d, c, a;
+    scanf("%f", &rad);
+    d = rad * 2;
+    c = 2 * PI * rad;
+    a = PI * pow(rad, 2);
+    printf("\nEl radio del circulo es: %f", rad);
+    printf("\nEl diametro del circulo es: %f", d);
+    printf("\nLa circunferencia del circulo es: %f", c);
+    printf("\nEl area del circulo es: %f", a);
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 30
+
+#include <stdio.h>
+#include <math.h>
+#include <stdlib.h>
+
+#define PI 3.14159
+
+int main() {
+    char name[100], lastName[100];
+    printf("Ingrese su nombre:\n");
+    fgets(name, sizeof(name), stdin); 
+    printf("Ingrese su apellido: \n");
+    fgets(lastName, sizeof(lastName), stdin); 
+    system("clear");
+    printf("Su nombre completo es %s %s", name, lastName);
+    return 0;
+}
+
+*/
+
+
+/*
+	EJERCICIO 31
+#include <stdio.h>
+
+int main() {
+    int a;
+    scanf("%d", &a);
+    if (a > 0) printf("Numero positivo");
+    else printf("Numero Negativo");
+    return 0;
+}
+
+*/
+
+/* 
+	EJERCICIO 32
+#include <stdio.h>
+
+int main() {
+    int a;
+    scanf("%d", &a);
+    if (a % 2 == 0) printf("Numero Par");
+    else printf("Numero Impar");
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 33
+#include <stdio.h>
+
+int main() {
+    double a, b;
+    printf("Ingresa un numero decimal \n");
+    scanf("%lf", &a);
+    // 100 Grados celsius = 212 Grados fahrenheit
+    b = (a * 212) / 100;
+    printf("%lf grados celsius son %lf grados fahrenheit", a, b);
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 34
+#include <stdio.h>
+
+int main() {
+    int num1, num2, aux;
+    printf("Ingresa el valor de num1:\n");
+    scanf("%d", &num1);
+    printf("Ingresa el valor de num2:\n");
+    fflush(stdin);
+    scanf("%d", &num2);
+    
+    printf("El valor de num1 = %d y el valor de num2 = %d\n", num1, num2);
+    aux = num2;
+    num2 = num1;
+    num1 = aux;
+    
+    printf("El valor invertido de num1 = %d, y el valor de num2 = %d", num1, num2);
+    return 0;
+}
+
+*/
+
+/* 
+	EJERCICIO 35 A
+#include <stdio.h>
+
+int main() {
+    while (getchar() != '#');
+    return 0;
+}
+
+
+	EJERCICIO 35 B
+#include <stdio.h>
+
+int main() {
+    while (getchar() != EOF);
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 38
+#include <stdio.h>
+
+#define INCREMENTO 6
+#define COSTO_MINIMO 50
+#define INCREMETO_DINERO 15
+
+int main() {
+    int costo = COSTO_MINIMO;
+    for (int i = 2; i <= 20; i+=6) {
+        if (i != 2) costo += INCREMETO_DINERO;
+        printf("Peso = %d ; Costo = %d$.\n", i, costo);
+    }
+    
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 39
+
+#include <stdio.h>
+
+int main() {
+    int n = 20;
+    int i;
+    for (i=0; i <= n; i++) printf("%d ", i);
+    printf("\n");
+    while(i != n + 1) {
+        printf("%d ", i);
+        i++;
+    } 
+    i = 0;
+    printf("\n");
+    do {
+        printf("%d ", i);
+        i++;
+    } while (i != n + 1);
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 41
+#include <stdio.h>
+
+int main() {
+    int n, nroMayor, nroMenor, num;
+    int acum = 0;
+    float media;
+    printf("Ingrese la cantidad de numeros que desea ingresar\n");
+    scanf("%d", &n);
+    
+    if (n == 0) {
+        printf("Ingresaste el cero\n");
+        return 0; // Terminar el programa
+    }
+    
+    // Leemos el primer numero e iniciamos el numeromayor y numeromenor
+    printf("Ingresa el primer numero\n");
+    fflush(stdin);
+    scanf("%d", &num);
+    
+    nroMenor = nroMayor = num;
+    acum = num;
+    
+    for (int i = 2; i < n; i++) {
+        printf("Ingresa un numero\n");
+        fflush(stdin);
+        scanf("%d", &num);
+        if (num > nroMayor) {
+            nroMayor = num;
+        }
+        if (num < nroMenor) {
+            nroMenor = num;
+        }
+    }
+    
+    // Calculamos la media
+    media = (float)(nroMayor + nroMenor) / 2;
+    printf("La media es %f", media);
+    return 0;
+}	
+*/
+
+/*
+	EJERCICIO 42
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int num;
+    do {
+        printf("Ingrese un numero:\n");
+        fflush(stdin);
+        scanf("%d", &num);
+        if (num < 0) printf("ERROR: El numero debe ser mayor a cero");
+        else if (num == 0) break;
+        else printf("%f\n", pow(num, 2));
+    } while (num != 0);
+    return 0;
+}
+	
+*/
+
+/*
+	EJERCICIO 43
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int countPos = 0;
+    int countNeg = 0;
+    int num;
+    for (int i = 0; i < 10; i++) {
+        printf("Ingrese un numero\n");
+        fflush(stdin);
+        scanf("%d", &num);
+        if (num > 0) countPos++;
+        else countNeg++;
+    }
+    
+    printf("\nSe ingresaron %d numeros positivos y %d numeros negativos", countPos, countNeg);
+    return 0;
+}
+
+*/
+
+/* 
+	EJERCICIO 44 A
+#include <stdio.h>
+
+int main() {
+    while (1) { 
+        char c = getchar();
+        if (c >= '1' && c <= '5') {
+            break; 
+        }
+    }
+    return 0;
+}
+
+	EJERCICIO 44 B
+#include <stdio.h>
+
+int main() {
+    while (1) { 
+        char c;
+        scanf("%c", &c);
+        if (c >= '1' && c <= '5') {
+            break; 
+        }
+    }
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 45
+
+#include <stdio.h>
+
+int main() {
+    char cad[20];
+    int a, e, i, o, u;
+    a = e = i = o = u;
+    printf("Ingrese una frase de 20 caracteres\n");
+    fgets(cad, sizeof(cad), stdin);
+    
+    printf("\n%s", cad);
+    for (int k = 0; k < sizeof(cad); k++) {
+        switch(cad[k]) {
+            case 'a':
+                a++;
+                break;
+            case 'e':
+                e++;
+                break;
+            case 'i':
+                i++;
+                break;
+            case 'o':
+                o++;
+                break;
+            case 'u':
+                u++;
+                break;
+            default:
+                break;
+        }
+    }
+    
+    printf("\nCantidad de A = %d", a);
+    printf("\nCantidad de E = %d", e);
+    printf("\nCantidad de I = %d", i);
+    printf("\nCantidad de O = %d", o);
+    printf("\nCantidad de U = %d", u);
+    return 0;
+}
+
+
+*/
+
+/*
+	EJERCICIO 46
+#include <stdio.h>
+
+int main() {
+    int dia;
+    do {
+        printf("Ingrese un dia:\n");
+        fflush(stdin);
+        scanf("%d", &dia);
+        if (dia == 1) printf("Lunes");
+        else if (dia == 2) printf("Martes");
+        else if (dia == 3) printf("Miercoles");
+        else if (dia == 4) printf("Jueves");
+        else if (dia == 5) printf("Viernes");
+        else if (dia == 6) printf("Sabado");
+        else if (dia == 7) printf("Domingo");
+        else printf("No corresponde a un dia");
+    } while(dia != 0);
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 47
+#include <stdio.h>
+
+int main() {
+    int c = 0;
+    for (int i = 0; i <= 100; i++) {
+        if (i%2 == 0) {
+            c++;
+            printf("%d\t", i);
+        }
+        if (c == 6) {
+            c = 0;
+            printf("\n");
+        }
+    }
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 48
+#include <stdio.h>
+
+int main() {
+    int multiplos2[100], multiplos3[100];
+    int cont2 = 0, cont3 = 0;
+    for (int i = 1; i <= 100; i++) {
+        if (i%2 == 0) {
+            multiplos2[cont2] = i;
+            cont2++;
+        }
+        
+        if (i%3 == 0) {
+            multiplos3[cont3] = i;
+            cont3++;
+        }
+    }
+    
+    printf("Multiplos de 2\n");
+    for (int i = 0; i < cont2; i++) {
+        printf("%d ", multiplos2[i]);
+    }
+    
+    printf("\nMultiplos de 3\n");
+    for (int i = 0; i < cont3; i++) {
+        printf("%d ", multiplos3[i]);
+    }
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 49
+#include <stdio.h>
+
+int main() {
+    int num;
+    int init;
+    do {
+        printf("Ingrese un numero\n");
+        fflush(stdin);
+        scanf("%d", &num);
+        for (init = 1; init <= num; init++) {
+            if (init%2 == 0) {
+                printf("%d ", init);
+            }
+        }
+        printf("\n");
+    } while (num != 0 || num < 0);
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 50
+#include <stdio.h>
+
+int main() {
+    int cont;
+    for (int i = 0; i < 100; i++) {
+        cont = 0;
+        for (int k = 1; k <= i; k++) {
+            if (i%k == 0) cont++;
+        }
+        if (cont == 2) {
+            printf("%d ", i);
+        }
+    }
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 51
+
+#include <stdio.h>
+
+int main() {
+    int numero;
+    int suma, producto;
+    suma = 0;
+    producto = 1;
+    for (int i = 0; i < 10; i++) {
+        scanf("%d", &numero);
+        
+        if (numero > 0) {
+            suma += numero;
+        } else {
+            producto += (producto * numero);
+        }
+    }
+    
+    printf("La suma de los positivos es %d ", suma);
+    printf("\nEl producto de los negativos es %d", producto);
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 53
+#include <stdio.h>
+
+int main() {
+    int menor = 1, mayor = 100;
+    int numero;
+    
+    scanf("%d", &numero);
+    if (numero > menor && numero < mayor) {
+        printf("%d Pertenece al intervalo", numero);
+    } else {
+        printf("No pertenece al intervalo");
+    }
+    return 0;
+}
+
+
+*/
+
+/*
+	EJERCICIO 54
+#include <stdio.h>
+
+int main() {
+    int numero, producto, r = 0;
+    do {
+        printf("Ingrese un numero:\n");
+        fflush(stdin);
+        scanf("%d", &numero);
+        
+        for (int i = 1; i <= 10; i++) {
+            producto = numero * i;            
+            printf("%d * %d = %d\n", numero, i, producto);
+        }
+        if (numero < 0 || numero > 10) r = 1;
+    } while (r == 0);
+    return 0;
+}
+
+
+*/
+
+/*
+	EJERCICIO 56
+#include <stdio.h>
+
+int main() {
+    int num;
+    printf("Ingrese un numero:\n");
+    scanf("%d", &num);
+    if (num < 0) return 0;
+    
+    for (int i = num; i >= 0; i--) {
+        printf("%d ", i);
+    }
+    // Emitir sonido (pitido)
+    printf("\a"); 
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 57
+#include <stdio.h>
+
+int main() {
+    for (int i = 0; i <= 255; i++) {
+        printf("%d = %c\n", i, i);
+    }
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 63
+#include <stdio.h>
+
+int main() {
+    int numeros[1000], num, suma;
+    
+    for (int i = 0; i < 1000; i++) {
+        numeros[i] = i;
+    }
+    
+    printf("Ingrese un numero \n");
+    scanf("%d", &num);
+    
+    for (int i = 0; i < 1000; i++) {
+        if (numeros[i] > num) suma += numeros[i];
+    }
+    
+    printf("LA SUMATORIA DE NUMEROS MAYORES QUE %d ES %d", num, suma);
+
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 64
+#include <stdio.h>
+
+int main() {
+    int size = 100;
+    int numeros[size];
+    int op, aux;
+    
+    for (int i = 0; i < size; i++) {
+        numeros[i] = i;
+    }
+    
+    for (int i = 0; i < size; i++) {
+        printf("%d ", numeros[i]);
+    }
+
+    printf("\n1-Ordenar de mayor a menor\n2-Ordenar de menor a mayor\n");
+    scanf("%d", &op);
+    
+    if (op == 1) {
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - i - 1; j++) {
+                if (numeros[j] < numeros[j + 1]) {
+                    int temp = numeros[j];
+                    numeros[j] = numeros[j + 1];
+                    numeros[j + 1] = temp;
+                }
+            }
+        }
+        
+        for (int i = 0; i < size; i++) {
+            printf("%d ", numeros[i]);
+        }
+    }
+
+    if (op == 2) {
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - i - 1; j++) {
+                if (numeros[j] > numeros[j + 1]) {
+                    int temp = numeros[j];
+                    numeros[j] = numeros[j + 1];
+                    numeros[j + 1] = temp;
+                }
+            }
+        }
+        
+        for (int i = 0; i < size; i++) {
+            printf("%d ", numeros[i]);
+        }
+    }
+
+    if (op != 1 && op != 2) printf("Criterio no valido!");
+
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 65
+#include <stdio.h>
+
+int main() {
+    int rowSize = 3, columnSize = 3;
+    int arr[rowSize][columnSize];
+    int mayor = 0, row = 0, column = 0;
+        
+    printf("Ingrese los numeros\n");
+    for (int i = 0; i < rowSize; i++) {
+        for (int k = 0; k < columnSize; k++) {
+            scanf("%d", &arr[i][k]);
+            
+            if (arr[i][k] > mayor) {
+                mayor = arr[i][k];
+                row = i;
+                column = k;
+            }
+        }
+    }
+    
+    printf("El mayor valor ingresado se encuentra en fila %d, columna %d y su valor es %d", row, column, arr[row][column]);
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 66
+#include <stdio.h>
+
+int main() {
+    int size = 10;
+    int arr[size], suma = 0, mayor = 0;
+    float prom;
+    
+    printf("Ingrese los numeros\n");
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &arr[i]);        
+        
+        suma += arr[i];
+        
+        if (arr[i] > mayor) {
+            mayor = arr[i];
+        }
+    }
+    
+    prom = suma / size;
+    
+    printf("Los numeros ingresado son: \n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\nEl mayor de ellos es %d", mayor);
+    printf("\nLa suma de ellos es %d", suma);
+    printf("\nSu promedio es %f", prom);
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 67
+#include <stdio.h>
+
+int main() {
+    char letras[26];
+    char letra = 'a';
+    
+    for (int i = 0; i < 26; i++) {
+        letras[i] = letra;
+        letra++;
+        printf("%c ", letras[i]);
+    }
+
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 68
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main() {
+    char cad[200];
+    int cadSize = 0, digitos = 0, espacios = 0;
+    fgets(cad, 200, stdin);
+
+    cadSize = strlen(cad);
+
+    for (int i = 0; i < cadSize; i++){
+        if (isdigit(cad[i])) {
+            digitos++;
+        }
+        
+        if (isspace(cad[i])) {
+            espacios++;
+        }
+    }
+    // Restamos un espacio del ultimo caracter o fin de cadena '\0'
+    espacios--;
+    printf("LA CANTIDAD DE DIGITOS QUE APARECEN EN %s ES %d Y LA CANTIDAD DE BLANCOS ES %d", cad, digitos, espacios);
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 70
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+int main() {
+    int size = 10;
+    int a[size], b[size], c[size];
+    
+    for (int i = 0; i < size; i++) {
+        scanf("%d", &a[i]);
+        scanf("%d", &b[i]);
+        
+        if (a[i] < b[i]) c[i] = a[i];
+        else c[i] = b[i];
+    }
+    
+    printf("A. B. C\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d, %d, %d\n", a[i], b[i], c[i]);
+    }
+    
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 71
+#include <stdio.h>
+
+int main() {
+    int size = 20, flag = 0, num;
+    int arr[size];
+
+    while (flag < size) {
+        scanf("%d", &num);
+        if (num > 0) {
+            arr[flag] = num;
+            flag++;
+        }        
+    }
+    
+    // Mostrar vector como fue ingresado
+    printf("El vector fue ingresado :\n");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    
+    // Ordenar el vector de forma decreciente
+    printf("\nEl vector ordenado de mayor a menor es:\n");
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (arr[j] < arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+    
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 75
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    int size = 200, mayor;
+    char cad1[size], cad2[size];
+    
+    fgets(cad1, size, stdin);
+    fgets(cad2, size, stdin);
+    
+    mayor = strcmp(cad1, cad2);
+    if (mayor > 0) {
+        printf("LA MAYOR ES: %s\n", cad1);        
+    } else {
+        printf("LA MAYOR ES: %s\n", cad2);
+    }
+    
+    printf("LAS CADENAS CONCATENADAS QUEDAN %s\n", strcat(cad1, cad2));
+    
+    if (strlen(cad1) > strlen(cad2)) printf("LA CADENA MAS LARGA ES %s\n", cad1);
+    else printf("LA CADENA MAS LARGA ES %s\n", cad2);
+    
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 76	
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    int size = 1000, cont = 0;
+    char cad1[size], palabra[100];
+    char *ptr;
+
+    printf("Ingrese el texto:\n");
+    fgets(cad1, sizeof(cad1), stdin);
+    
+    printf("Ingrese la palabra:\n");
+    fflush(stdin);
+    scanf("%s", palabra);
+    
+    // Buscamos la primera ocurrencia de la palabra a buscar
+    ptr = strstr(cad1, palabra);
+    while(ptr != NULL) {
+        cont++;
+        // Proxima ocurrencia de la palabra a buscar
+        ptr = strstr(ptr+1, palabra);
+    }
+
+    printf("La palabra es %s\n", palabra);
+    printf("El texto es %s\n", cad1);
+    printf("La palabra '%s' aparece %d veces", palabra, cont);
+    return 0;
+}	
+*/
+
+/*
+	EJERCICIO 79
+
+#include <stdio.h>
+
+int main() {
+    struct alumnos {
+        char nombreAlumno[20];
+        char nroLegajo[5];
+        char domicilio[15];
+        char turno;
+    };
+    struct alumnos alumno = {"Pablo Lopez", "45643", "Cordoba 1232", 'M'};
+    
+    printf("Nombre -> %s\n", alumno.nombreAlumno);
+    printf("Legajo -> %s\n", alumno.nroLegajo);
+    printf("Domicilio -> %s\n", alumno.domicilio);
+    printf("Turno -> %c\n", alumno.turno);
+    return 0;
+}
+*/
+
+/*
+	EJERCICIO 81
+#include <stdio.h>
+
+int main() {
+    struct alumnos {
+        char nombreAlumno[20];
+        char turno;
+    };
+    
+    struct alumnos a1 = {"Pablo Lopez", 'M'};
+    struct alumnos a2 = {"Julian Rodriguez", 'M'};
+    
+    if (a1.turno == a2.turno) {
+        printf("%s y %s pertenecen al turno %c", a1.nombreAlumno, a2.nombreAlumno, a1.turno);
+    } else {
+        printf("%s y %s no pertenecen al mismo turno", a1.nombreAlumno, a2.nombreAlumno);
+    }
+    return 0;
+}
+
+	OTRA FORMA USANDO STRCPY PARA COMPLETAR LOS CAMPOS DE LA ESTRUCTURA
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    struct alumnos {
+        char nombreAlumno[20];
+        char turno;
+    };
+    
+    struct alumnos a1, a2;
+    strcpy(a1.nombreAlumno, "Pablo Lopez");
+    a1.turno = 'M';
+    strcpy(a2.nombreAlumno, "Julian Sanchez");
+    a2.turno = 'T';
+    
+    if (a1.turno == a2.turno) {
+        printf("%s y %s pertenecen al turno %c", a1.nombreAlumno, a2.nombreAlumno, a1.turno);
+    } else {
+        printf("%s y %s no pertenecen al mismo turno", a1.nombreAlumno, a2.nombreAlumno);
+    }
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 82
+#include <stdio.h>
+#include <string.h>
+
+struct alumnos {
+    char nombreAlumno[20];
+    char legajo[5];
+    char domicilio[15];
+    char turno;
+};
+
+int main() {
+    struct alumnos listadoAlumnos[300];
+    struct alumnos a1;
+    strcpy(listadoAlumnos[0].nombreAlumno, "Juan Gomez");
+    strcpy(listadoAlumnos[0].nombreAlumno, "12345");
+    strcpy(listadoAlumnos[0].domicilio, "San Juan 1056");
+    listadoAlumnos[0].turno = 'M';
+    a1 = listadoAlumnos[0];    
+    printf("Nombre: %s\nLegajo: %s\nDomicilio: %s\nTurno: %c", a1.nombreAlumno, a1.legajo, a1.domicilio, a1.turno);
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 83
+#include <stdio.h>
+#include <string.h>
+
+struct alumnos {
+    char nombre[20];
+    char apellido[20];
+    int altura;
+};
+
+int main() {
+    struct alumnos listadoAlumnos[400];
+    int altura, max = 0, index = 0;
+    
+    // Carga de los alumnos simulada
+    for (int i = 0; i < 400; i++) {
+        fgets(listadoAlumnos[i].nombre, 20, stdin);
+        fgets(listadoAlumnos[i].apellido, 20, stdin);
+        scanf("%d", &altura);
+        listadoAlumnos[i].altura = altura;
+        
+        /*
+        OTRA FORMA DE CARGAR LA altura
+        scanf("%d", &listadoAlumnos[i].altura);
+        */
+    }
+    
+    for (int i = 0; i < 400; i++) {
+        if (listadoAlumnos[i].altura > max) {
+            max = listadoAlumnos[i].altura;
+            index = i;
+        }
+    }
+    
+    printf("Nombre: %s\nAltura: %d", listadoAlumnos[index].nombre, listadoAlumnos[index].altura);
+    
+    return 0;
+}
+
+*/
+
+/* 
+	EJERCICIO 84
+#include <stdio.h>
+#include <string.h>
+
+struct cliente{
+    char codigo[5];
+    char nombre[20];
+    char domicilio[20];
+    float saldo;
+};
+
+int main() {
+    struct cliente clientes[400];
+    char codigo[5];
+    char r = 'S';
+    int flag, index;
+    
+    // Carga de datos simulada
+    for (int i = 0; i < sizeof(clientes); i++) {
+        printf("Ingrese el codigo del cliente:");
+        fgets(clientes[i].codigo, 5, stdin);
+        fflush(stdin);
+        printf("Ingrese el nombre del cliente");
+        fgets(clientes[i].nombre, 20, stdin);
+        fflush(stdin);
+        printf("Ingrese el domicilio");
+        fgets(clientes[i].domicilio, 20, stdin),
+        fflush(stdin);
+        printf("Ingrese el saldo");
+        scanf("%f", &clientes[i].saldo);
+    }
+    
+    do {
+        printf("Ingrese el codigo del cliente que desea buscar:");
+        scanf("%s", &codigo);
+
+        index = 0;
+        flag = 0;
+        while (flag == 0) {
+            if (strcmp(clientes[index].codigo, codigo) == 0) {
+                printf("%s,%s,%f", clientes[index].nombre, clientes[index].domicilio, clientes[index].saldo);
+                flag = 1;
+            }   
+            index++;
+            // sizeof(lientes) = 400
+            if (index == sizeof(clientes)) {
+                flag = 1;
+                printf("No se encontro");
+            }
+        }
+        
+        printf("Desea continuar? S = Si o N = no");
+        scanf("%c", &r);
+    } while (r == 's');
+    
+    return 0;
+}
+
+	
+*/
+
+/* 
+	EJERCICIO 85 - REVISAR
+#include <stdio.h>
+#include <string.h>
+
+struct alumno{
+    char legajo[6];
+    char nombre[20];
+    float nota;
+};
+
+int main() {
+    struct alumno alumnos[8], alAux;
+    char leg[6];
+    float nota;
+    int op, flag, index, size = 8;
+    // Inicializacion de datos
+    strcpy(alumnos[0].legajo, "11111");
+    strcpy(alumnos[0].nombre, "Alumno1");
+    alumnos[0].nota = 7.4;
+
+    strcpy(alumnos[1].legajo, "22222");
+    strcpy(alumnos[1].nombre, "Alumno2");
+    alumnos[1].nota = 8.0;
+
+    strcpy(alumnos[2].legajo, "33333");
+    strcpy(alumnos[2].nombre, "Alumno3");
+    alumnos[2].nota = 7.2;
+
+    strcpy(alumnos[3].legajo, "44444");
+    strcpy(alumnos[3].nombre, "Alumno4");
+    alumnos[3].nota = 8.5;
+
+    strcpy(alumnos[4].legajo, "55555");
+    strcpy(alumnos[4].nombre, "Alumno5");
+    alumnos[4].nota = 10.0;
+
+    strcpy(alumnos[5].legajo, "66666");
+    strcpy(alumnos[5].nombre, "Alumno6");
+    alumnos[5].nota = 7.8;
+
+    strcpy(alumnos[6].legajo, "77777");
+    strcpy(alumnos[6].nombre, "Alumno7");
+    alumnos[6].nota = 8.0;
+
+    strcpy(alumnos[7].legajo, "88888");
+    strcpy(alumnos[7].nombre, "Alumno8");
+    alumnos[7].nota = 9.2;
+
+    printf("Bienvenidos\n");
+    do {
+        printf("Ingresa el legajo del alumno:\n");
+        fgets(leg, 6, stdin);
+        leg[strcspn(leg, "\n")] = '\0'; 
+        
+        // Limpiar el buffer de entrada
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
+
+        printf("Ingrese la nota:\n");
+        scanf("%f", &nota);
+        // Limpiar el buffer de entrada
+        while ((c = getchar()) != '\n' && c != EOF);
+
+        index = 0;
+        flag = 0;
+        while (flag == 0) {
+            if (strcmp(alumnos[index].legajo, leg) == 0) {
+                alumnos[index].nota = nota;
+                flag = 1;
+            }
+            index++;
+            
+            if (index > size) {
+                printf("No se encontro!\n");
+                flag = 1;
+            }
+
+        }
+        
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - i - 1; j++) {
+                if (alumnos[j].nota > alumnos[j + 1].nota) {
+                    alAux = alumnos[j];
+                    alumnos[j] = alumnos[j + 1];
+                    alumnos[j + 1] = alAux;
+                }
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+            printf("%d--", i);
+            printf("%s\t%s\t%f\n", alumnos[i].legajo, alumnos[i].nombre, alumnos[i].nota);
+        }
+        
+        printf("Desea continuar? 1-si, 2-no\n");
+        scanf("%d", &op);
+    } while(op != 2);
+    
+    
+    return 0;
+}
+
+*/ 
+
+/*
+	EJERCICIO 86
+#include <stdio.h>
+#include <string.h>
+
+struct alumno{
+    char legajo[6];
+    char nombre[20];
+    float promedio;
+};
+
+int main() {
+    struct alumno alumnos[300];
+    int contOk = 0, contDic = 0, contMar = 0; max = 0, best = 0;
+    
+    // cargaDatos();
+    
+    for (int i = 0; i < 300; i++) {
+        if (alumnos[i].promedio >= 7) {
+            contOk++;
+        }
+        if (alumnos[i].promedio < 7 && alumnos[i].promedio >= 4) {
+            contDic++;
+        }
+        if (alumnos[i].promedio < 4) {
+            contMar++;
+        }
+        if (alumnos[i].promedio > max) {
+            best = i;
+        }
+    }
+    
+    // Mostrar en consola
+    printf("Cantidad de alumnos aprobados: %d\n", contOk);
+    printf("Cantidad de alumnos que rinden en diciembre: %d\n", contDic);
+    printf("Cantidad de alumnos que rinden en marzo: %d\n", contMar);
+    printf("El alumno con mejor promedio es %s y su promedio es %f", alumnos[best].nombre, alumnos[best].promedio);
+    return 0;
+}
+
+*/
+
+/*
+	EJERCICIO 89
+#include <stdio.h>
+#include <math.h>
+
+int cubo(int);
+
+int main() {
+    int result;
+    for (int i = 1; i <= 5; i++) {
+        result = cubo(i);
+        printf("El cubo de %d es %d\n", i, result);
+    }
+    return 0;
+}
+
+int cubo(int base) {
+    return (pow(base, 3));
+}
+
+*/
+
+/*
+	EJERCICIO 90
+#include <stdio.h>
+#include <math.h>
+
+void suma(int, int);
+void resta(int, int);
+void multiplicar(int, int);
+void dividir(int, int);
+
+int main() {
+    int a, b, op = 0;
+    do {
+        printf("Ingresa numero a:\n");
+        scanf("%d", &a);
+        fflush(stdin);
+        printf("\nIngresa numero b:\n");
+        scanf("%d", &b);
+        
+        printf("\n1-SUMAR\n2-RESTAR\n3-MULTIPLCAR\n4-DIVIDIR\n5-SALIR\n");
+        scanf("%d", &op);
+        switch(op) {
+            case 1:
+                suma(a, b);
+                break;
+            case 2:
+                resta(a, b);
+                break;
+            case 3:
+                multiplicar(a, b);
+                break;
+            case 4: 
+                dividir(a, b);
+                break;
+            case 5:
+                printf("Adios");
+                break;
+            default:
+                printf("Opcion no valida");
+                break;
+        }
+    } while (op != 5);
+    return 0;
+}
+
+void suma(int a, int b) {
+     printf("La suma entre %d y %d es %d\n", a, b, (a+b));
+}
+
+void resta(int a, int b) {
+     printf("La resta entre %d y %d es %d\n", a, b, (a-b));
+}
+
+void multiplicar(int a, int b) {
+     printf("La multiplicacion entre %d y %d es %d\n", a, b, (a*b));
+}
+
+void dividir(int a, int b) {
+     printf("La division entre %d y %d es %d\n", a, b, (a/b));
+}
+
+*/
+
+/*
+	EJERCICIO 91
+#include <stdio.h>
+#include <math.h>
+
+#define PI 3.14159
+
+void showDiametro(int);
+void showCircunferencia(int);
+void showArea(int);
+
+int main() {
+    int radio;
+    printf("Ingrese el radio:\n");
+    scanf("%d", &radio);
+    showDiametro(radio);
+    showCircunferencia(radio);
+    showArea(radio);
+    return 0;
+}
+
+void showDiametro(int r) {
+    printf("El diametro es %d\n", (2*r));
+}
+
+void showCircunferencia(int r) {
+    float c = 2 * PI * r;
+    printf("La circunferencia es %f\n", c);
+}
+
+void showArea(int r) {
+    float a = PI * pow(r, 2);
+    printf("El area es %f", a);
+}
+
+*/
+
+/*
+	EJERCICIO 92
+#include <stdio.h>
+#include <math.h>
+
+int mayor(int*, int);
+float prom(int*, int);
+
+int main() {
+    int numeros[10], m;
+    float p;
+    for (int i = 0; i < 10; i++) {
+        scanf("%d\n", &numeros[i]);
+    }
+    
+    m = mayor(numeros, 10);
+    p = prom(numeros, 10);
+    printf("\nLOS NUMEROS INGRESADOS SON: ");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", numeros[i]);
+    }
+    printf("\nEL MAYOR DE ELLOS ES %d", m);
+    printf("\nSU PROMEDIO ES %f", p);
+    
+    return 0;
+}
+
+int mayor(int *arr, int size) {
+    int m = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] > m) {
+            m = arr[i];
+        }
+    }
+    return (m);
+}
+
+float prom(int *arr, int size) {
+    int sum = 0;
+    float p;
+    for (int i = 0; i < size; i++) {
+        sum += arr[i];
+    }
+    p = sum / size;
+    return (p);
+}
+
+*/
+
+/*
+	EJERCICIO 93
+#include <stdio.h>
+
+int main() {
+    int arr[10] = {23,5,98,65,3,55,73,9,21,85}, *p;
+    p = arr;
+
+    printf("%d\n", arr[*(p+7)]); // CONSULTAR
+    printf("%d\n", *arr + 3);
+    printf("%d\n", *p++);
+    printf("%d\n", *(arr + 1));
+    printf("%d\n", (*p)++);
+    printf("%d\n", *p);
+    printf("%d\n", *p++);
+    printf("%d\n", *p);
+    
+
+    return 0;
+}
+
+*/
