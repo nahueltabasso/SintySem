@@ -1,0 +1,46 @@
+/*
+/*
+    EJERCICIO
+    Ingresar una cadena y por medio de una funcion determinar
+    1- Cantidad de digitos que tiene la cadena
+    2- Cantidad de caracteres que tiene la cadena
+    
+    El prototipo de la funcion es el siguiente:
+    int verificaDigitosYLongitud(char * , int *);
+    
+    La funcion recibe la cadena ingresada y un puntero a entero para obtener la 
+    cantidad de digitos de la cadena. La funcion retorna un valor entero con la 
+    cantidad de caracteres de la cadena ingresada.
+*/
+
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int verificaDigitosYLongitud(char *, int *);
+
+int main() {
+    int cantidadDigitos = 0, cantidadCaracteres = 0;
+    char cadena[1000];
+    
+    fgets(cadena, 1000, stdin);
+    printf("%s", cadena);
+    cantidadCaracteres = verificaDigitosYLongitud(cadena, &cantidadDigitos);
+    printf("\nCantidad de caracteres de la cadena %d y la cantidad de digitos de la cadena %d", cantidadCaracteres, cantidadDigitos);
+    return 0;
+}
+
+int verificaDigitosYLongitud(char *cadena, int *cont) {
+    int caracs = 0;
+    for (int i = 0; i < strlen(cadena); i++) {
+        caracs++;
+        if (isdigit(cadena[i])) {
+            (*cont)++;
+        }
+    }
+    return (caracs);
+}
+
+
+
+*/

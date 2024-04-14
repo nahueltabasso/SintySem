@@ -1,0 +1,227 @@
+1-
+int a=3;
+int *punt;
+punt = &a;
+
+2- Direccion de memoria de 'a' por ejemplo FF82.
+El %d o %i  muestra el valor de a, osea imprime 10. El %p muestra la direccion de memoria de a por eso se muestra &a
+
+3- Muestra el valor de numero porque punt es precedido por * que es el operador de indireccion que muestra el contenido de la direccion a la que apunta punt-
+
+4- No entra al if porque punt1 no apunta a la misma direccion de memoria que punt2
+if (*punt1 == *punt2) printf("Son iguales");
+
+5- 
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+char * compara(char *, char[7][20]);
+void toLowerCase(char *);
+
+int main() {
+    char semana[7][20] = {
+        {"Lunes"},
+        {"Martes"},
+        {"Miercoles"},
+        {"Jueves"},
+        {"Viernes"},
+        {"Sabado"},
+        {"Domingo"}
+    };
+    char dia[20];
+    
+    printf("Mostramos los dias\n");
+    for (int i = 0; i < 7; i++) {
+        for (int k = 0; k < 20; k++) {
+            printf("%c", semana[i][k]);
+        }
+        printf("\n");
+    }
+    
+    printf("\nIngresa un dia\n");
+    scanf("%s", dia);
+
+    char *result = compara(dia, semana);
+    
+    printf("\nResult = %s", result);
+    
+    return 0;
+}
+
+char * compara(char *cadena, char data[7][20]) {
+    int flag = 0;
+    for (int i = 0; i < 7; i++) {
+        char temp[20];
+        strcpy(temp, data[i]);
+        toLowerCase(temp);
+        toLowerCase(cadena);
+        if (strcmp(cadena, temp) == 0) {
+            printf("Entra\n");
+            return ("Dia escrito correctamente");
+        }
+    }
+    return ("Dia escrito incorrectamente");
+}
+
+void toLowerCase(char *cadena) {
+    for (int i = 0; cadena[i] != '\0'; i++) {
+        cadena[i] = tolower(cadena[i]);
+    }
+}
+
+6-
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+char * carga(void);
+
+int main() {
+    char *p;
+    p = carga();
+    
+    printf("%p ---- primer elemento %c", p, *p);
+    free(p);
+    return 0;
+}
+
+char * carga() {
+    char *cadena = malloc(100 * sizeof(char));
+    printf("Ingresa una cadena\n");
+    scanf("%s", cadena);
+    return (cadena);
+}
+
+
+7-
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+void carga(char *, int *);
+
+int main() {
+    char cadena[100];
+    int p = 0;
+    
+    carga(cadena, &p);
+    
+    printf("La cadena contiene %d caracteres\n", p);
+    for (int i = 0; i < strlen(cadena); i++) {
+        printf("%c", cadena[i]);
+    }
+    return 0;
+}
+
+void carga(char *cadena, int *cont) {
+    //scanf("%s", cadena); solo lee hasta el primer espacio
+    fgets(cadena, 100, stdin);
+    *cont = strlen(cadena) - 1;     // restamos el caracter final '\0'
+}
+
+8-
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define MAX_CADENAS 5
+#define MAX_LONGITUD 25
+
+void cargarCadena(char [][MAX_LONGITUD], int [], int *);
+int calcularLongitud(char *);
+
+int main() {
+    char cadenas[MAX_CADENAS][MAX_LONGITUD];
+    int longitudes[MAX_CADENAS];
+    int cantidad = 0;
+
+    printf("Cargar cadenas\n");
+    cargarCadena(cadenas, longitudes, &cantidad);
+    
+    for(int i = 0; i < MAX_CADENAS; i++) {
+        printf("\nCadena %d es %s y su longitud es %d", i, cadenas[i], longitudes[i]);
+    }
+
+    return 0;
+}
+
+void cargarCadena(char cadenas[][MAX_LONGITUD], int longitudes[], int *cont) {
+    char nuevaCadena[MAX_LONGITUD];
+    while (*cont < MAX_CADENAS) {
+        scanf("%s", nuevaCadena);
+        
+        int repetida = 0;
+        for (int i = 0; i < *cont; i++) {
+            if (strcmp(cadenas[i], nuevaCadena) == 0) {
+                repetida = 1;
+                printf("Error: la cadena ya existe en la tabla.\n");
+                break;
+            }
+        }
+        
+        if (repetida == 0) {
+            int longitud = calcularLongitud(nuevaCadena);
+            strcpy(cadenas[*cont], nuevaCadena);
+            longitudes[*cont] = longitud;
+            (*cont)++;
+        }
+    }
+}
+
+int calcularLongitud(char *cadena) {
+    return (strlen(cadena));
+}
+
+
+9-
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+#define MAX_CADENAS 5
+#define MAX_LONGITUD 25
+
+struct tab { char cadena[25]; int alfa; };
+
+char * ingresa_cadena();
+struct tab * forma_tabla(char *, int *);
+
+struct tab tabla[MAX_CADENAS];
+
+int main() {
+    struct tab *p_tabla;
+    char rta;
+    int filas = 0;
+    do {
+        char *c;
+        system("cls");
+        printf("Ingrese una palabra\n");
+        c = ingresa_cadena();                
+        fflush(stdin);
+        p_tabla = forma_tabla(c, &filas);
+        free(c);
+        printf("\n\nDesea continuar ingresando palabras? (s/n)\n");
+        scanf("%c", &rta);
+    } while (rta == 's');
+    
+    
+    for (int i = 0; i < MAX_CADENAS; i++) {
+        printf("\nLa cadena %d -> %s - Su longitud es %d", i, tabla[i].cadena, tabla[i].alfa);
+    }
+    return 0;
+}
+
+struct tab * forma_tabla(char *cadena, int *filas) {
+    for (int i = 0; i < *filas; i++) {
+        if (strcmp(tabla[i].cadena, cadena) == 0) {
+            printf("Error: la cadena ya existe en la tabla.\n");
+            return NULL;
+        }
+    }
+    
+    (*filas)++;
+    strcpy(tabla[*filas].cadena, cadena);
+    tabla[*filas].alfa = strlen(cadena);
+    return (tabla);
+}
