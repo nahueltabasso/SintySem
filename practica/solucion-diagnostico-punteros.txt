@@ -177,51 +177,62 @@ int calcularLongitud(char *cadena) {
 9-
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 
-#define MAX_CADENAS 5
-#define MAX_LONGITUD 25
+#define MAX_CADENAS 100
+#define MAX_CARACTERES 25
 
-struct tab { char cadena[25]; int alfa; };
+struct tab {char cadena[MAX_CARACTERES]; int alfa;};
 
-char * ingresa_cadena();
-struct tab * forma_tabla(char *, int *);
-
-struct tab tabla[MAX_CADENAS];
+char * Ingresa_Cadena();
+struct tab* Forma_Tabla(char *cadena, int *filas);
 
 int main() {
-    struct tab *p_tabla;
     char rta;
     int filas = 0;
+    struct tab tabla[MAX_CADENAS];
+
     do {
-        char *c;
         system("cls");
-        printf("Ingrese una palabra\n");
-        c = ingresa_cadena();                
-        fflush(stdin);
-        p_tabla = forma_tabla(c, &filas);
-        free(c);
-        printf("\n\nDesea continuar ingresando palabras? (s/n)\n");
-        scanf("%c", &rta);
+        char *cadena = Ingresa_Cadena();
+        struct tab *nueva_fila = Forma_Tabla(cadena, &filas);
+        if (nueva_fila != NULL) {
+            tabla[filas - 1] = *nueva_fila;
+            printf("Cadena agregada a la tabla.\n");
+        } else {
+            printf("La cadena ya existe en la tabla.\n");
+        }
+        printf("\nDesea continuar ingresando palabras? (s/n): ");
+        scanf(" %c", &rta);
     } while (rta == 's');
-    
-    
-    for (int i = 0; i < MAX_CADENAS; i++) {
-        printf("\nLa cadena %d -> %s - Su longitud es %d", i, tabla[i].cadena, tabla[i].alfa);
+
+    // Mostrar la tabla resultante
+    printf("\nTabla resultante:\n");
+    for (int i = 0; i < filas; i++) {
+        printf("Cadena: %s, Cantidad de caracteres alfabéticos: %d\n", tabla[i].cadena, tabla[i].alfa);
     }
+
     return 0;
 }
 
-struct tab * forma_tabla(char *cadena, int *filas) {
+struct tab* Forma_Tabla(char *cadena, int *filas) {
+    static struct tab tabla[MAX_CADENAS];
+
+    // Verificar si la cadena ya existe en la tabla
     for (int i = 0; i < *filas; i++) {
-        if (strcmp(tabla[i].cadena, cadena) == 0) {
-            printf("Error: la cadena ya existe en la tabla.\n");
+        if (strcmp(cadena, tabla[i].cadena) == 0) {
             return NULL;
         }
     }
-    
-    (*filas)++;
+
+    // Si la cadena no existe, agregarla a la tabla
     strcpy(tabla[*filas].cadena, cadena);
-    tabla[*filas].alfa = strlen(cadena);
-    return (tabla);
+
+    int caracteres = strlen(cadena);
+    tabla[*filas].alfa = caracteres;
+
+    // Incrementar el indice (numeros de filas)
+    (*filas)++;
+
+    // Devolver la dirección de la nueva fila
+    return &tabla[*filas - 1];
 }
