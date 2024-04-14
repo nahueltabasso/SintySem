@@ -1463,3 +1463,176 @@ int main() {
 }
 
 */
+
+/*
+	EJERCICIO 98
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+int verificaDigitos(char *, int *);
+
+int main() {
+    int digitos = 0, caracts;
+    char cad[100];
+    printf("Ingresa una palabra\n");
+    scanf("%s", cad);
+    fflush(stdin);
+    
+    caracts = verificaDigitos(cad, &digitos);
+    
+    printf("La cadena que ingresaste es %s\n", cad);
+    printf("La cadena tiene %d caracteres de los cuales %d son digitos", caracts, digitos);
+    return 0;
+}
+
+
+int verificaDigitos(char *cad, int *c) {
+    int caracs = 0;
+    for (int i = 0; i < strlen(cad); i++) {
+        caracs++;
+        if (isdigit(cad[i])) {
+            (*c)++;
+        }
+    }
+    return (caracs);
+} 
+
+*/
+
+/*
+	EJERCICIO 99
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+char * verif(char *);
+
+int main() {
+    int digitos = 0, caracts;
+    char cad[100];
+    printf("Ingresa una palabra\n");
+    scanf("%s", cad);
+    fflush(stdin);
+    
+    printf("La cadena que ingresaste es %s\n", cad);
+    printf("La cadena esta solo formada por caracteres alfanumericos? %s", verif(cad));
+    return 0;
+}
+
+
+char * verif(char *cad) {
+    for (int i = 0; i < strlen(cad); i++) {
+        if (isalnum(cad[i]) == 0) {
+            return "No";
+        }
+    }
+    return "Si";
+}
+*/
+
+/*
+	EJERCICIO 100
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+void carga(char *, int *);
+void esVocal(char, int *);
+int esConsonante(char);
+
+int main() {
+    int size = 100, vocales = 0, consonantes = 0, cantidad = 0;
+    float promVocal = 0, promConsonante = 0;
+    char cad[size];
+    // Carga del texto
+    carga(cad, &size);
+    
+    for (int i = 0; i < strlen(cad); i++) {
+        if (isalpha(cad[i])) {
+            cantidad++;
+            esVocal(cad[i], &vocales);
+            consonantes += esConsonante(cad[i]);
+        }
+    }
+    
+    size = strlen(cad) - 1;
+    promVocal = ((float)vocales / size) * 100;
+    promConsonante = ((float)consonantes / size) * 100;
+    
+    printf("El texto %s tiene %f de vocales y %f de consonantes", cad, promVocal, promConsonante);
+    return 0;
+}
+
+/*
+ Considero que el segundo parametro de esta funcion es
+ la longitud del texto a ingresar ya que no se especifica en el 
+ enunciado
+*/
+void carga(char *cad, int *size) {
+    printf("Ingrese un texto:\n");
+    fgets(cad, *size, stdin);
+}
+
+void esVocal(char c, int *vocales) {
+    c = tolower(c);
+    if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+        printf("%c - Entra\n", c);
+        (*vocales)++;
+    }
+}
+
+int esConsonante(char c) {
+    c = tolower(c);
+    if (c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u') {
+        return 1;
+    }
+    return 0;
+}
+
+
+*/
+
+/*
+	EJERCICIO 101
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
+
+char * carga(int *);
+char * cambia_texto(char *, int);
+
+int main() {
+    char *cad, *cad1;
+    int size = 0;
+    
+    cad = carga(&size);
+    cad1 = cambia_texto(cad, size);
+    
+    printf("El texto %s cambiado se lee %s", cad, cad1);
+    return 0;
+}
+
+char * carga(int *size) {
+    char *cad = malloc(1000 * sizeof(char));
+    printf("Ingrese un texto (max 1000 caracteres):\n");
+    fgets(cad, 1000, stdin);
+    
+    *size = strlen(cad);
+    return (cad);
+}
+
+char * cambia_texto(char *cad, int size) {
+    for (int i = 0; i < size; i++) {
+        if (isdigit(cad[i])) {
+            cad[i] = '*';
+        }
+    }
+    
+    return (cad);
+}
+
+
+
+*/
