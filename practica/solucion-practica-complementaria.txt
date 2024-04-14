@@ -1,0 +1,228 @@
+LENGUAJE C - PRACTICA COMPLEMENTARIA
+
+Estructuras y Arreglos de estructuras
+
+1- Resuelto en el archivo solucion-practica-c.txt
+
+2- Resuelto en el archivo solucion-practica-c.txt
+
+3- Resuelto en el archivo solucion-practica-c.txt
+
+4- Resuelto en el archivo solucion-practica-c.txt
+
+5- Resuelto en el archivo solucion-practica-c.txt
+
+6- Resuelto en el archivo solucion-practica-c.txt
+
+7- Resuelto en el archivo solucion-practica-c.txt
+
+8- Resuelto en el archivo solucion-practica-c.txt
+
+9- 
+#include <stdio.h>
+
+struct dias {int num; char dia[10];};
+
+int main() {
+    struct dias semana[7] = {
+        {1, "Lunes"},
+        {2, "Martes"},
+        {3, "Miercoles"},
+        {4, "Jueves"},
+        {5, "Viernes"}
+        //{6, "Sabado"},
+        //{7, "Domingo"}
+    };
+    int dia;
+    do {
+        printf("Ingresa un dia (1-7)\n");
+        scanf("%d", &dia);
+    } while (dia < 0 && dia > 7);
+    
+    for (int i = 0; i < 7; i++) {
+        if (semana[i].num == dia) {
+            printf("Ingresaste un dia valido!\n");
+            printf("%d - %s\n", semana[i].num, semana[i].dia);
+            return 0;
+        }
+    }
+    
+    printf("El dia %d no existe en el arreglo de estructuras", dia);
+    return 0;
+}
+
+10-
+#include <stdio.h>
+#include <string.h>
+
+struct dias {int num; char dia[10];};
+
+int main() {
+    struct dias semana[7] = {
+        {1, "Lunes"},
+        {2, "Martes"},
+        {3, "Miercoles"},
+        {4, "Jueves"},
+        {5, "Viernes"},
+        {6, "Sabado"},
+        {7, "Domingo"}
+    };
+    char semanaArr[7][20] = {{"Lunes"}, {"Martes"}, {"Jueves"}, {"Miercoles"}, {"Sabado"}, {"Domingo"}, {"Viernes"}};
+    int flag;
+    for (int i = 0; i < 7; i++) {
+        //printf("For de externo %d - %s\n", semana[i].num, semana[i].dia);
+        flag = 0;
+        for (int k = 0; k < 7; k++) {
+            //printf("For interno %s\n", semanaArr[i]);
+            if (strcmp(semana[i].dia, semanaArr[k]) == 0) {
+                printf("Lo encontro\n");
+                flag = 1;
+                break;
+            } 
+        }
+        if (flag == 0) {
+            printf("El arreglo de estructura con el arreglo bidimensional no coinciden en los datos de la semana\n");
+            return 0;
+        }
+    }
+    
+    printf("El arreglo de estructura coincide con el arreglo bidimensional en los datos de la semana\n");
+
+    return 0;
+}
+
+
+Practica de Funciones (pasaje de parámetros por valor)
+
+1- Resuelto en el archivo solucion-practica-c.txt
+
+2- Resuelto en el archivo solucion-practica-c.txt
+
+3- Resuelto en el archivo solucion-practica-c.txt
+
+4- Resuelto en el archivo solucion-practica-c.txt
+
+5-
+#include <stdio.h>
+
+void esPrimo(int);
+
+int main() {
+    int nro;
+    
+    printf("Ingresa un numero\n");
+    scanf("%d", &nro);
+    
+    esPrimo(nro);
+    return 0;
+}
+
+void esPrimo(int nro) {
+    int c = 0;
+    for (int i = 1; i <= nro; i++) {
+        if (nro%i == 0) c++;
+    }
+    
+    if (c == 2) {
+        printf("Es primo");
+    } else {
+        printf("No es primo");
+    }
+}
+
+
+PUNTEROS 
+
+1- Resuelto en el archivo solucion-practica-c.txt
+
+2- Resuelto en el archivo solucion-practica-c.txt
+
+3- Resuelto en el archivo solucion-practica-c.txt
+
+4- Resuelto en el archivo solucion-practica-c.txt
+
+5- Resuelto en el archivo solucion-practica-c.txt
+
+6- 
+#include <stdio.h>
+#include <string.h>
+
+void micopy(char *, char *);
+
+int main() {
+    char cad[100], copyCad[100];
+    
+    printf("Ingresa una cadena\n");
+    fgets(cad, 100, stdin);
+    
+    micopy(cad, copyCad);
+    
+    printf("Cadena Original %s\n", cad);
+    printf("Cadena Copiada %s\n", copyCad);
+    
+    return 0;
+}
+
+void micopy(char *cad, char *aux) {
+    strcpy(aux, cad);
+}
+
+7- Resuelto en el archivo solucion-practica-c.txt y en el archivo practica-extra.txt
+
+8- Resuelto en el archivo solucion-practica-c.txt
+
+9- Resuelto en el archivo solucion-practica-c.txt
+
+10- Resuelto en el archivo solucion-practica-c.txt
+
+11- Resuelto en el ejercicio 10 de la practica Lenguaje C - Practica Complementaria.pdf
+
+12- 
+#include <stdio.h>
+#include <string.h>
+
+struct dias {int num; char dia[10];};
+
+char * comparaDias(struct dias *);
+
+int main() {
+    struct dias semana[7] = {
+        {1, "Lunes"},
+        {2, "Martes"},
+        {3, "Miercoles"},
+        {4, "Jueves"},
+        {5, "Viernes"},
+        {6, "Sabado"},
+        {7, "Domingo"}
+    };
+        
+    printf("\n%s\n", comparaDias(semana));
+    
+    return 0;
+}
+
+char * comparaDias(struct dias *semana) {
+    char arr[7][20] = {{"Lunes"}, {"Martes"}, {"Jueves"}, {"Miercoles"}, {"Sabado"}, {"Domingo"}, {"Viernes"}};
+    int flag;
+    for (int i = 0; i < 7; i++) {
+        flag = 0;
+        for (int k = 0; k < 7; k++) {
+            if (strcmp(semana[i].dia, arr[k]) == 0) {
+                printf("Lo encontro\n");
+                flag = 1;
+            } 
+        }
+        if (flag == 0) {
+            return "Algun dia es incorrecto";
+        }
+    }
+    return "Todos los dias son correctos";
+}
+
+
+
+
+
+
+
+
