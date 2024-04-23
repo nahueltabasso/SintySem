@@ -1,0 +1,89 @@
+/*
+    FINAL TIPO 2
+*/
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+struct pal {
+    char palabra[25];
+    char tipo[20];
+};
+
+int carga_reserva(char [40][15]);
+char * carga_texto(void);
+struct pal * separa(char *, int *);
+struct pal * depura(struct pal *, int);
+void clasifica(struct pal *, char [][15], int);
+
+int main() {
+    char palabrasReservadas[40][15];
+    int cantidadPalReservadas;
+    int *cantEstructuras;
+    char *texto;
+    struct pal *separaTexto, *depuraTexto;
+    
+    texto = carga_texto();
+    cantidadPalReservadas = carga_reserva(palabrasReservadas);
+    separaTexto = separa(texto, &cantEstructuras);
+    depuraTexto = depura(separaTexto, *cantEstructuras);
+    
+    clasifica(depuraTexto, palabrasReservadas, cantidadPalReservadas);
+    
+    printf("Impresion de las palabras luego de la clasificacion\n");
+    for (int i = 0; strcmp(*depuraTexto[i].palabra, "******") != 0, i++) {
+        printf("La palabra %s es de tipo %s\n", *depuraTexto[i].palabra, *depuraTexto[i].tipo);
+    }
+    return 0;
+}
+
+char * carga_texto() {
+    static char cad[1000];
+    int i = 0;
+    while ((cad[i] = getchar()) != EOF && i < 1000) {
+        i++;
+    }
+    cad[i] = '\0';
+    return cad
+}
+
+int carga_reserva(char arr[40][15]) {
+    int cont = 0;
+    char rta;
+    do {
+        fgets(arr[cont], 15, stdin);
+        cont++;
+        printf("Desea ingresar otra palabra? n/s");
+        scanf("%c", &rta);
+    } while (rta == 's');
+    return cont;
+}
+
+void clasifica(struct pal *palabras, char pal_res[][15], int cantidadPalabrasReservadas) {
+    int flagRes, cantidadCaracteresPal;
+    for (int i = 0; strcmp(palabras[i].palabra, "******") != 0; i++) {
+        flagRes = 0;
+        while (k < cantidadPalabrasReservadas || flagRes != 1) {
+            if (strcmp(palabras[i].palabra, pal_res[k]) == 0) {
+                strcpy(palabras[i].tipo, "palabra reservada");
+                flagRes = 1;
+            }
+        }
+        
+        if (flagRes == 0) {
+            cantidadCaracteresPal = strlen(palabras[i].palabra);
+            if (cantidadPalReservadas <= 8) {
+                if (isalpha(palabras[i].palabra[0])) {
+                    strcpy(palabras[i].tipo, "identificador");
+                } else {
+                    strcpy(palabras[i].tipo, "otra");
+                }
+            } else {
+                strcpy(palabras[i].tipo, "otra");
+            }
+        }
+    }
+}
+
+
