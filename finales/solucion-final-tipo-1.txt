@@ -1,0 +1,86 @@
+/*
+    FINAL TIPO 1
+*/
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+#define CANTIDAD_MAXIMA_CADENAS 100
+#define LONGITUD_MAXIMA_CADENA 25
+
+struct tab {
+    char cadena[25];
+    int alfa;
+};
+
+char * ingresa_cadena();
+struct tab * forma_tabla(char *, int *);
+void busca_muesta(int, struct tab *, int);
+
+int main() {
+    char *cad;
+    char op;
+    int cantidadCad = 0, filas, longitud;
+    struct tab *tabla;
+    filas = 0;
+    do {
+        printf("Ingresa una cadena:\n");
+        cad = ingresa_cadena();
+        cantidadCad++;
+        tabla = forma_tabla(cad, &filas);
+        
+        printf("Ingresa un numero mayor a 0 y menor a 25\n");
+        scanf("%d", &longitud);
+        fflush(stdin);
+
+        busca_muesta(longitud, tabla, filas);
+
+        printf("\nDesea ingresar otra cadena? s/n");
+        scanf("%c", &op);
+        fflush(stdin);
+    } while (op != 'n' && cantidadCad < 100);
+    
+    return 0;
+}
+
+char * ingresa_cadena() {
+    static char cad[LONGITUD_MAXIMA_CADENA];
+    int i = 0;
+    /*
+    while ((cad[i] = getchar()) != EOF && i < LONGITUD_MAXIMA_CADENA) {
+        i++;
+    } */
+    fgets(cad, LONGITUD_MAXIMA_CADENA, stdin);
+    return cad;
+}
+
+struct tab * forma_tabla(char *cad, int *filas) {
+    static struct tab tabla[CANTIDAD_MAXIMA_CADENAS];
+    int cont;
+    for (int i = 0; i <= *filas; i++) {
+        if (strcmp(tabla[i].cadena, cad) != 0) {
+            strcpy(tabla[i].cadena, cad);
+            cont = 0;
+            for (int k = 0; k < strlen(cad); k++) {
+                if (isalpha(cad[k])) cont++;
+            }
+            tabla[i].alfa = cont;
+            *(filas)++;
+            printf("La cadena no existia, ahora se almaceno en la tabla\n");
+            return tabla;
+        }
+    }
+    
+    printf("La cadena ya existe en la tabla");
+    return tabla;
+}
+
+void busca_muesta(int longitud, struct tab *tabla, int filas) {
+    for (int i = 0; i < filas; i++) {
+        if (tabla[i].alfa <= longitud) {
+            printf("La palabra %s tiene %d caracteres\n", tabla[i].cadena, longitud);
+        }
+    }
+}
+
+
