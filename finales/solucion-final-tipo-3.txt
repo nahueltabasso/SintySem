@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+#define CANTIDAD_MAXIMA_EMAILS 200
+#define LONGITUD_MAXIMA_CADENA 200
+
+struct tickCol {
+    char incid[200];
+    char modulo[15];
+};
+
+void carga_ticket (struct tickCol *, int * );
+char * identifica_modulo (char *);
+char * mayor_modulo (struct tickCol *, int , int *);
+
+int main() {
+    int cont = 0, oc = 0;
+    char op, *mayor;
+    struct tickCol arr[CANTIDAD_MAXIMA_EMAILS]
+    do {
+        carga_ticket(arr, &cont);
+        
+        printf("Desea ingresar otro ticket? s/n");
+        fflush(stdin);
+        scanf("%c", &op);
+    } while (op != 'n' || cont < 200);
+    
+    system("cls");
+    mayor = mayor_modulo(arr, cont, &oc);
+    printf("El modulo con mayor ocurrencia es: %s, tiene %d incidencias", *mayor, oc);
+    return 0;
+}
+
+void carga_ticket(struct tickCol *arr, int *cont) {
+    char body[200];
+    char *p;
+    printf("Ingresa el cuerpo del email:\n");
+    fgets(cad, LONGITUD_MAXIMA_CADENA, stdin);
+    fflush();
+    p = identifica_modulo(cad);
+    // Validamos que el modulo es valido
+    if (strcmp(cad, "***") == 0) {
+        printf("Email no valido. Modulo no reconocido\n");
+    } else {
+        // Implica que el modulo es valido, completamos la estructura
+        printf("Email valido!. El modulo es %s\n", *p);
+        strcpy(arr[*cont].incid, cad);
+        strcpy(arr[*cont].modulo, *p);
+        // Actualizamos el contador de filas
+        *(cont)++
+    }
+}
+
+char * mayor_modulo(struct tickCol arr, int filas, int *modulo) {
+    int cont_h = 0, cont_v = 0, cont_p = 0;
+    char *modulo_mayor;
+    for (int i = 0; i < filas; i++) {
+        if (strcmp(arr[i].modulo, "Hotel") == 0) cont_h++;
+        if (strcmp(arr[i].modulo, "Vuelo") == 0) cont_v++;
+        if (strcmp(arr[i].modulo, "Paquete") == 0) cont_p++;
+    }
+    
+    if (cont_h > cont_v && cont_h > cont_v) {
+        modulo_mayor = "Hotel";
+        *modulo = cont_h
+    }
+    if (cont_v > cont_h && cont_v > cont_p) {
+        modulo_mayor = "Vuelo";
+        *modulo = cont_v;
+    }
+    if (cont_p > cont_h && cont_p > cont_v) {
+        modulo_mayor = "Paquete";
+        *modulo = cont_p;
+    }
+    
+    return modulo_mayor;
+}
+
+
+
