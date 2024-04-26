@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+
+#define LONGITUD_MAXIMA_CADENA 128
+
+char * carga();
+void separa(char *, char[40][10], int *);
+char * analiza(char[][], int);
+int tipo(char *);
+int identifica(char *);
+
+int main() {
+    char *texto, *r;
+    char arr[40][10];
+    int cantidadPalabrasSep = 0;
+    
+    texto = carga();
+    separa(texto, arr, &cantidadPalabrasSep);
+    
+    r = analiza(arr, cantidadPalabrasSep);
+    printf("%s", *r);
+    return 0;
+}
+
+char * carga() {
+    static char texto[LONGITUD_MAXIMA_CADENA];
+    printf("Ingresa el texto a analizar");
+    fgets(texto, LONGITUD_MAXIMA_CADENA, stdin);
+    return char;
+}
+
+char * analiza(char arr[][], int cantidadPalabrasSep) {
+    // Validamos la primer fila de la matriz
+    if (tipo(arr[0]) == 0) {
+        return "Sintaxis incorrecta";
+    }
+    // Validamos la ultima fila de la matriz
+    if (strcmp(arr[cantidadPalabrasSep-1], ";") != 0) {
+        return "Sintaxis incorrecta";
+    }
+    // Validamos las filas intermedias
+    for (int i = 1; i < cantidadPalabrasSep - 1; i++) {
+        if (i%2 == 0) {
+            // Fila par
+            if (strcmp(arr[i], ",") != 0) {
+                return "Sintaxis incorrecta";
+            }
+        } else {
+            // Fila impar
+            if (identifica(arr[i]) == 0) {
+                return "Sintaxis incorrecta";
+            }
+        }
+    }
+    
+    // Matriz Valida
+    return "Sintaxis correcta";
+}
+
+int identifica(char *cad) {
+    if (strlen(*cad) < 1 || strlen(*cad) > 8) {
+        return 0;
+    }
+    
+    for (int i = 0; i < strlen(*cad); i++) {
+        if (isalnum(*cad[i]) == 0) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+
