@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_CANT_PATHS 100
+
+struct paths {
+    char ruta[128];
+    int niveles;
+}
+
+char * cargaRuta(void);
+int validaRuta(char *);
+char * guardaRuta(char *, struct paths *, int *);
+int * nivelesRuta(char *);
+
+int main() {
+    struct paths pathsArr[MAX_CANT_PATHS];
+    int contPaths = 0, valid;
+    char *path, *msj;
+    
+    do {
+        path = cargaRuta();
+        valid = validaRuta(path);
+        if (valid == 0) {
+            printf("Sintaxis correcta\n");
+            msj = guardaRuta(path, pathsArr, &contPaths);
+            printf("%s", *msj);
+        } else {
+            printf("Sintaxis incorrecta\n");
+        }
+        
+        printf("Desea ingresar otro path? s-n\n");
+        scanf("%c", &op);
+    } while (op == 'n' && contPaths < MAX_CANT_PATHS);
+
+    return 0;
+}
+
+char * guardaRuta(char ruta*, struct paths *paths, int *contPath) {
+    int *niveles;
+    for (int i = 0; i < *contPath; i++) {
+        if (strcmp(paths[i].ruta, ruta) == 0) {
+            return "El path ya existe";
+        }
+    }
+    
+    // Implica que no existe el path en el arreglo
+    niveles = nivelesRuta(ruta);
+    strcpy(paths[*contPath].ruta, ruta);
+    paths[*contPath].niveles = *niveles;
+    (*contPath)++;
+    return "Path creado con exito";
+}
+
+int validaRuta(char *cad) {
+    int i = 0, cont=0;
+    int cadSize = strlen(cad);
+    // Validamos la longitud del path
+    if (cadSize < 3 || cadSize > 128) {
+        return 1;
+    }
+    
+    // Validamos primer y utlimo caracter
+    if (strcmp(cad[0], "/") != 0 || strcmp(cad[cadSize-1], "/") != 0) {
+        return 1;
+    }
+    
+    // Validamos los directorios
+    while (i < strlen(cad)) {
+        while (cad[i] != '/') {
+            if (isalnum(cad[i])) {
+                i++;
+                cont++;
+            } else {
+                return 1;
+            }
+        }
+        
+        if (cont >= 1 && cont <= 8) {
+            cont = 0;
+            i++;
+        } else {
+            return 1;
+        }
+        
+        return 0;
+    }
+}
+
