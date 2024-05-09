@@ -1,0 +1,410 @@
+// EJERCICIO 1
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_CADENAS 5
+#define MAX_CARACTERES 25
+
+void carga_texto(char [][MAX_CARACTERES], int [], int *);
+
+int main() {
+    char cadenas[MAX_CADENAS][MAX_CARACTERES];
+    int cantCaractAlfa[MAX_CADENAS];
+    int filas = 0;
+    char rta;
+    do {
+        printf("Ingresa una cadena:\n");
+        carga_texto(cadenas, cantCaractAlfa, &filas);
+
+        printf("\nDesea ingresar otra cadena? s-n\n");
+        scanf(" %c", &rta); // Agregar un espacio en blanco antes de %c para ignorar el carácter de nueva línea
+
+        // Limpiar el búfer de entrada
+        while (getchar() != '\n');
+    } while (rta == 's');
+    
+    for (int i = 0; i < filas; i++) {
+        printf("%d - %s\tTiene %d caracteres alfabeticos\n", i, cadenas[i], cantCaractAlfa[i]);
+    }
+    return 0;
+}
+
+void carga_texto(char cadenas[][MAX_CARACTERES], int cantCarac[], int *filas) {
+    char cad[MAX_CARACTERES];
+    int flag = 0;
+    int contAlfa = 0;
+    // Cargamos la cadena
+    fgets(cad, MAX_CARACTERES, stdin);
+    printf("La cadena ingresada es: %s", cad);
+    
+    // Validamos que no este repetida
+    for (int i = 0; i <= *filas; i++) {
+        if (strcmp(cadenas[i], cad) == 0) {
+            printf("\nLa cadena %s ya existe en el arreglo", cad);
+            flag = 1;   // Significa que la cadena existe
+        }
+    }
+    
+    if (flag == 0) {
+        // Implica que la cadena no existe, la agregamos
+        strcpy(cadenas[*filas], cad);
+        // Contamos la cantidad de caracteres alfabeticos        
+        for (int i = 0; i < strlen(cad); i++) {
+            if (isalpha(cad[i])) contAlfa++;
+        }
+        
+        cantCarac[*filas] = contAlfa;
+        (*filas)++;
+    }
+}
+
+
+
+// EJERCICIO 2
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+#define MAX_CADENAS 5
+#define MAX_CARACTERES 25
+
+struct tab {char cadena[MAX_CARACTERES]; int alfa;};
+
+char * ingresa_cadena();
+struct tab * forma_tabla(char*, int *filas);
+
+int main() {
+    char *cadena;
+    struct tab * p_tabla;
+    int filas = 0;
+    char rta;
+    do {
+        cadena = ingresa_cadena();
+        while (getchar() != '\n');
+        p_tabla = forma_tabla(cadena, &filas);
+        //printf("CADENA = %s\n", cadena);
+        if (p_tabla != NULL) {
+            printf("La cadena %s tiene %d caracteres alfabetico\n", p_tabla->cadena, p_tabla->alfa);
+        }
+        printf("Desea continuar ingresando palabras? s-n\n");
+        scanf("%c", &rta);
+        while (getchar() != '\n');
+    } while (rta == 's');
+    return 0;
+}
+
+char * ingresa_cadena() {
+    static char cad[MAX_CARACTERES];
+    printf("Ingresa una cadena:\n");
+    //scanf("%s", cad);
+    fgets(cad, MAX_CARACTERES, stdin);
+    return cad;
+}
+
+struct tab * forma_tabla(char *cad, int *filas) {
+    static struct tab tabla[MAX_CADENAS];
+    int flag = 0;
+    int cont = 0;
+    for (int i = 0; i < *filas; i++) {
+        if (strcmp(tabla[i].cadena, cad) == 0) {
+            flag = 1;
+            printf("\nLa cadena ya existe\n");
+            return NULL;
+        }
+    }
+    
+    if (flag == 0) {
+        // Significa que la cadena no existia previamente
+        strcpy(tabla[*filas].cadena, cad);
+        for (int i = 0; i < strlen(cad); i++) {
+            if (isalpha(cad[i])) cont++;
+        }
+        tabla[*filas].alfa = cont;
+        (*filas)++;
+    }
+    return &tabla[*filas-1];
+}
+
+
+
+// EJERCICIO 3
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+int verificaDigitos(char *, int *);
+
+int main() {
+    char cadena[100];
+    char c;
+    int i = 0, cantidadDigitos = 0, cadSize;
+    // Cargar la cadena con getchar
+    while ((c = getchar()) != '\n' && c != EOF && i < 100) {
+        cadena[i++] = c;
+    }
+    
+    printf("La cadena es %s\n", cadena);
+    
+    cadSize = verificaDigitos(cadena, &cantidadDigitos);
+    printf("La cadena ingresa es %s\n", cadena);
+    printf("La cadena tiene %d caracteres, de los cuales %d son digitos", cadSize, cantidadDigitos);
+    return 0;
+}
+
+int verificaDigitos(char *cadena, int *cont) {
+    int size; 
+    
+    for (int i = 0; i < strlen(cadena); i++) {
+        if (isdigit(cadena[i])) (*cont)++;
+    }
+    
+    size = strlen(cadena);
+    return size;
+}
+
+
+
+// EJERCICIO 4
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+void carga(char *, int *);
+void esVocal(char, int *);
+int esConsonante(char);
+
+int main() {
+    char cad[100];
+    int longitud;
+    int contadoVocal, contadorConsonante;
+    contadoVocal = 0;
+    contadorConsonante = 0;
+    float p1, p2;
+    carga(cad, &longitud);
+    
+    printf("La cadena ingresada: %s, tiene %d caracteres\n", cad, longitud);
+
+    for (int i = 0; i < longitud; i++) {
+        if (isalpha(cad[i])) {
+            esVocal(cad[i], &contadoVocal);
+            contadorConsonante += esConsonante(cad[i]);
+        }
+    }
+    
+    p1 = ((float) contadoVocal / longitud) * 100; 
+    p2 = ((float) contadorConsonante / longitud) * 100;
+    
+    printf("El texto %s. Tiene %d de vocales. Lo que representa el %f por ciento\n", cad, contadoVocal, p1);
+    printf("Y tiene %d de consonantes. Lo que representa el %f por ciento", contadorConsonante, p2);
+    return 0;
+}
+
+void carga(char *cad, int *longitud) {
+    char c;
+    int i = 0;
+    printf("Ingresa un texto de no mas de 100 caracteres\n");
+    while ((c = getchar()) != '\n' && c != EOF && i <= 100) {
+        cad[i++] = c;
+    }
+    *longitud = strlen(cad);
+}
+
+void esVocal(char c, int *cont) {
+    if (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') {
+        (*cont)++;
+    }
+}
+
+int esConsonante(char c) {
+    if (c != 'a' && c != 'e' && c != 'i' && c != 'o' && c != 'u') {
+        printf("Entra\n");
+        return 1;
+    }
+    return 0;
+}
+
+
+
+// EJERCICIO 5
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+int mayor(int []);
+float prom(int []);
+
+int main() {
+    int arr[10];
+    
+    for (int i = 0; i < 10; i++) {
+        scanf("%d", &arr[i]);
+        printf("El numero ingresado es %d\n", arr[i]);
+    }
+
+    printf("LOS NUMEROS INGRESADOS SON: ");
+    for (int i = 0; i < 10; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    printf("EL MAYOR DE ELLOS ES: %d\n", mayor(arr));
+    printf("EL PROMEDIO ES: %f", prom(arr));
+    return 0;
+}
+
+int mayor(int arr[10]) {
+    int m = 0;
+    for (int i = 0; i < 10; i++) {
+        if (arr[i] > m) {
+            m = arr[i];
+        }
+    }
+    return m;
+}
+
+float prom(int arr[10]) {
+    float p;
+    int acum = 0;
+    for (int i = 0; i < 10; i++) {
+        acum += arr[i];
+    }
+    
+    p = (float) acum / 10;
+    return p;
+}
+
+
+
+// EJERCICIO 6
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+
+
+int main() {
+    struct alumno {char legajo[5]; char nombre[25]; float promedio};
+    struct alumno alumnos[300];
+    int contOk = 0; contDic = 0; contMar = 0; best = 0, index;
+    // simulamos la carga de datos
+    //
+    for (int i = 0; i < 300; i++) {
+        if (alumnos[i].promedio >= 7) contOk++;
+        if (alumnos[i].promedio >= 4 && alumnos[i].promedio < 7) contDic++;
+        if (alumnos[i].promedio < 4) contMar++;
+        
+        if (alumno[i].promedio > best) {
+            best = alumno[i].promedio;
+            index = i;
+        }
+    }
+
+    printf("APROBRARON %d", contOk);
+    printf("RINDEN EN DICIEMBRE %d", contDic);
+    printf("RINDEN EN MARZO %d", contMar);
+    printf("MEJOR PROMEDIO PARA %s, SU PROMEDIO ES %f", alumnos[index].nombre, alumnos[index].promedio);
+    return 0;
+}
+
+
+
+// EJERCICIO 7
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+struct alumno {
+  char nombre[25];
+  char legajo[5];
+  float nota;
+};
+
+int main() {
+    struct alumno alumnos[8];
+    char rta;
+    
+    // Inicializacion de datos
+    strcpy(alumnos[0].legajo, "11111");
+    strcpy(alumnos[0].nombre, "Alumno1");
+    alumnos[0].nota = 7.4;
+
+    strcpy(alumnos[1].legajo, "22222");
+    strcpy(alumnos[1].nombre, "Alumno2");
+    alumnos[1].nota = 8.0;
+
+    strcpy(alumnos[2].legajo, "33333");
+    strcpy(alumnos[2].nombre, "Alumno3");
+    alumnos[2].nota = 7.2;
+
+    strcpy(alumnos[3].legajo, "44444");
+    strcpy(alumnos[3].nombre, "Alumno4");
+    alumnos[3].nota = 8.5;
+
+    strcpy(alumnos[4].legajo, "55555");
+    strcpy(alumnos[4].nombre, "Alumno5");
+    alumnos[4].nota = 10.0;
+
+    strcpy(alumnos[5].legajo, "66666");
+    strcpy(alumnos[5].nombre, "Alumno6");
+    alumnos[5].nota = 7.8;
+
+    strcpy(alumnos[6].legajo, "77777");
+    strcpy(alumnos[6].nombre, "Alumno7");
+    alumnos[6].nota = 8.0;
+
+    strcpy(alumnos[7].legajo, "88888");
+    strcpy(alumnos[7].nombre, "Alumno8");
+    alumnos[7].nota = 9.2;
+
+    char legajo[6];
+    float nota;
+    int size = 8;
+    do {
+        int flag = 0;
+        printf("Ingresa el legajo del alumno:\n");
+        fgets(legajo, 6, stdin);
+        while (getchar() != '\n');
+        
+        for (int i = 0; i < 8; i++) {
+            if (strcmp(alumnos[i].legajo, legajo) == 0) {
+                printf("Hemos encontrado al alumno con legajo %s\n", legajo);
+                printf("Ingresa la nota del alumno:\n");
+                scanf("%f", &nota);
+                alumnos[i].nota = nota;
+                flag = 1;
+            }
+        }
+        
+        if (flag == 0) {
+            printf("No se encontro un alumno con el legajo %s\n", legajo);
+        }
+        
+        printf("Desea volver a ejecutar el programa? s-n\n");
+        scanf("%c", &rta);
+        while (getchar() != '\n');
+    } while (rta == 's');
+    
+    for (int i = 0; i < size-1; i++) {
+        for (int k = 0; k < size-1-1; k++) {
+            if (alumnos[k].nota < alumnos[k+1].nota) {
+                struct alumno aux = alumnos[k];
+                alumnos[k] = alumnos[k+1];
+                alumnos[k+1] = aux;
+            }
+        }
+    }
+    
+    for (int i = 0; i < 8; i++) {
+        printf("\nLegajo: %s - Nombre: %s - Nota: %f", alumnos[i].legajo, alumnos[i].nombre, alumnos[i].nota);
+    }
+    return 0;
+}
+
+
