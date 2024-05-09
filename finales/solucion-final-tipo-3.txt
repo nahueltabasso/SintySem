@@ -1,81 +1,82 @@
 #include <stdio.h>
-#include <ctype.h>
 #include <string.h>
+#include <ctype.h>
 
-#define CANTIDAD_MAXIMA_EMAILS 200
-#define LONGITUD_MAXIMA_CADENA 200
+#define MAX_CARACTERES 200
 
 struct tickCol {
     char incid[200];
     char modulo[15];
 };
 
-void carga_ticket (struct tickCol *, int * );
-char * identifica_modulo (char *);
-char * mayor_modulo (struct tickCol *, int , int *);
+void carga_ticket(struct tickCol *, int *);
+char identifica_modulo(char *);
+char mayor_modulo(struct tickCol *, int, int *);
 
 int main() {
-    int cont = 0, oc = 0;
-    char op, *mayor;
-    struct tickCol arr[CANTIDAD_MAXIMA_EMAILS]
-    do {
-        carga_ticket(arr, &cont);
-        
-        printf("Desea ingresar otro ticket? s/n");
-        fflush(stdin);
-        scanf("%c", &op);
-    } while (op != 'n' || cont < 200);
+    struct tickCol arr[200];
+    int contTickets = 0, ocurrencias;
+    char rta, *mayor;
     
-    system("cls");
-    mayor = mayor_modulo(arr, cont, &oc);
-    printf("El modulo con mayor ocurrencia es: %s, tiene %d incidencias", *mayor, oc);
+    do {
+        printf("Ingresa el ticker:\n");
+        carga_ticket(arr, &contTickets);
+        
+        printf("Desea agregar otro ticket? s-n\n");
+        scanf("%c", &rta);
+        fflush(stdin);
+    } while (rta == 's');
+    
+    // Mostramos la estadisticas
+    mayor = mayor_modulo(arr, contTickets, &ocurrencias);
+    printf("El modulo con mayor ocurrencias es: %s, tiene %d incidencias", mayor, ocurrencias);
     return 0;
 }
 
 void carga_ticket(struct tickCol *arr, int *cont) {
-    char body[200];
-    char *p;
-    printf("Ingresa el cuerpo del email:\n");
-    fgets(cad, LONGITUD_MAXIMA_CADENA, stdin);
-    fflush();
-    p = identifica_modulo(cad);
-    // Validamos que el modulo es valido
-    if (strcmp(cad, "***") == 0) {
-        printf("Email no valido. Modulo no reconocido\n");
-    } else {
-        // Implica que el modulo es valido, completamos la estructura
-        printf("Email valido!. El modulo es %s\n", *p);
-        strcpy(arr[*cont].incid, cad);
-        strcpy(arr[*cont].modulo, *p);
-        // Actualizamos el contador de filas
-        *(cont)++
+    char ticket[MAX_CARACTERES], *modulo;
+    int i = 0;
+    
+    while ((ticket[i] = getchar()) != EOF && i < MAX_CARACTERES) i++;
+    fflush(stdin);
+    modulo = identifica_modulo(ticket);
+    if (strcmp(modulo, "***") == 0) {
+        printf("Email no valido. Modulo no reconocido");
+    }
+    
+    if (strcmp(modulo, "***") != 0) {
+        // Cargamos el ticket y modulo
+        strcpy(arr[*cont].incid, ticket);
+        strcpy(arr[*cont].modulo, modulo);
+        // Incrementamos la cantidad
+        (*cont)++;
     }
 }
 
-char * mayor_modulo(struct tickCol arr, int filas, int *modulo) {
-    int cont_h = 0, cont_v = 0, cont_p = 0;
-    char *modulo_mayor;
-    for (int i = 0; i < filas; i++) {
-        if (strcmp(arr[i].modulo, "Hotel") == 0) cont_h++;
-        if (strcmp(arr[i].modulo, "Vuelo") == 0) cont_v++;
-        if (strcmp(arr[i].modulo, "Paquete") == 0) cont_p++;
+char * mayor_modulo(struct tickCol *arr, int cantidad, int *ocurrencia) {
+    int contH = contV = contP = 0;
+    for (int i = 0; i < cantidad; i++) {
+        if (strcmp(arr[i].modulo, "Hotel") == 0) contH++;
+        if (strcmp(arr[i].modulo, "Vuelo") == 0) contV++;
+        if (strcmp(arr[i].modulo, "Paquete") == 0) contP++;
     }
     
-    if (cont_h > cont_v && cont_h > cont_v) {
-        modulo_mayor = "Hotel";
-        *modulo = cont_h
-    }
-    if (cont_v > cont_h && cont_v > cont_p) {
-        modulo_mayor = "Vuelo";
-        *modulo = cont_v;
-    }
-    if (cont_p > cont_h && cont_p > cont_v) {
-        modulo_mayor = "Paquete";
-        *modulo = cont_p;
+    if (contH > contV && contH > contP) {
+        *ocurrencia = contH;
+        return "Hotel";
     }
     
-    return modulo_mayor;
+    if (contV > contH && contV > contP) {
+        *ocurrencia = contV;
+        return "Vuelo";
+    }
+    
+    if (conP > contH && contP > contV) {
+        *ocurrencia = contV;
+        return "Paquete";
+    }
+    
+    return "Error";
 }
-
 
 
