@@ -1,0 +1,80 @@
+ 
+1- Se desea formar una tabla de cadenas de caracteres NO REPETIDAS. En dicha tabla debe figurar
+cada cadena ingresada, la cantidad de caracteres alfabeticos de la misma. Se admitira
+un maximo de 100 cadenas y cada una de 25 caracteres.
+
+
+2- Se desea formar una tabla de cadena de caracteres, NO REPETIDA. En dicha tabla debe figurar
+cada cadena ingresada, la cantidad de caractere alfabeticos de la misma. Se admitira un maximo
+de 100 cadenas y cada una de hasta 25 caracteres
+
+char * ingresa_cadena() PROGRAMAR
+
+struct tab * forma_tabla(char *, int *filas) PROGRAMAR
+
+La funcion forma_tabla recibe la direccion de la cadena, la almacena en la tabla si NO esta ya
+almacenada y comparte con su llamada la cantidad de filas ocupadas de la misma a traves del parametro
+int *filas. Calcula y almacena la cantidad de digitos alfabeticos de la cadena.
+
+struct tab {char cadena[25], int alfa;}
+
+El main debe generarse de esta manera
+do {
+    system("cls");
+    cadena = ingresa_cadena();
+    fflush(stdin);
+    p_tabla = forma_tabla(cadena, &filas);
+    printf("Desea continuar ingresando palabras? s-n);
+    scanf("%c", &rta);
+} while (rta == 's');
+
+
+3- Ingresar desde el main una cadena, y a través de una función mostrar cuántos dígitos
+tiene la cadena y también su longitud. La función recibe dos parámetros, un puntero a
+char para recibir la cadena, y un puntero a entero que devuelve al main la cantidad de
+dígitos que tiene la cadena. La función retorna un entero con la cantidad de caracteres
+que tiene la cadena (su longitud).
+El prototipo de la función es el siguiente: int verificaDigitos (char *, int *);
+
+
+4- Desarrollar un programa en lenguaje C, que realice las siguientes acciones:
+a) Cargue un texto.
+b) Determine cuál es el porcentaje de vocales sobre los caracteres del texto.
+c) Determine cuál es el porcentaje de consonantes sobre los caracteres del texto.
+d) Muestre:
+El texto………………………….…………………………………. tiene……………% de vocales y
+………….% de consonantes.
+Para resolver esta problemática deberá utilizar las siguientes funciones:
+- Una función que cargue un texto(que incluya cualquier tipo de caracteres, incluso la
+nueva línea) cuyo prototipo será:
+void carga (char*, int*)
+- Una función que solamente determine si un carácter es una vocal (no cuente cantidad
+de vocales), su prototipo será:
+void esVocal (char, int*)
+- Una función que solamente determine si un carácter es una consonante (no cuente
+cantidad de consonantes), con prototipo: int esConsonante (char)
+
+
+5- Escribir un programa que ingrese 10 números enteros, los cargue en un arreglo
+unidimensional, y a través de dos funciones busque el mayor de ellos y calcule el
+promedio y muestre:
+LOS NÚMEROS INGRESADOS SON : ...................
+EL MAYOR DE ELLOS ES: .................................
+SU PROMEDIO ES : .........................................
+Las funciones a utilizar deben llamarse máximo y media respectivamente. Diseñar los
+prototipos correspondientes.
+
+
+6- Un profesor de matemática de un establecimiento educativo registra de cada alumno Nº
+de legajo, nombre y promedio. Según el promedio desea saber cuántos alumnos
+aprobaron (promedio mayor o igual a 7), cuantos rinden en diciembre (promedio menor
+a 7 y mayor o igual a 4) y cuantos rinden examen en marzo (promedio menor a 4).
+Además, desea conocer el Nº de legajo y nombre del alumno con mejor promedio. El
+profesor tiene 300 alumnos en sus clases.
+
+
+7- Se ingresa el apellido, la nota y el legajo de los 8 mejores alumnos de un curso. Realizar
+un programa que permita modificar los datos ingresados hasta que el usuario lo
+determine. Para ello se ingresa el legajo y la nota a modificar. Si no se encuentra el legajo
+se deberá mostrar un mensaje de error. Finalmente mostrar los datos ordenados por
+legajo.
