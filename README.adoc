@@ -1,0 +1,7 @@
+= SINTAXIS Y SEMANTICAS DE LOS LENGUAJES
+
+Este repositorio es un rejunte de las soluciones de toda la practica de Lenguaje C como las practica de teoria acerca de compiladores
+lenguajes, expresiones regulares, gramaticas formales y automatas finitos.
+Tambien estan resueltos algunos finales de practica como finales de teoria.
+
+Considerar que en la practica de teoria puede haber algunos errores en la resolucion de algunos ejercicios de la practica 2 - Lenguajes formales.
